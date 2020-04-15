@@ -1,12 +1,15 @@
 from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from kitabu.models import Review, Ebook
 
 
 class ReviewSerializer(ModelSerializer):
+    review_author = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Review
-        fields = "__all__"
+        exclude = ("ebook",)
+        # fields = "__all__"
 
 
 class EbookSerializer(ModelSerializer):
